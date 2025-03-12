@@ -1,7 +1,3 @@
-resource "aws_eip" "ztna_connector_eip" {
-  domain = "vpc"
-}
-
 resource "aws_cloudformation_stack" "ztna_connector" {
   for_each = var.ztnas 
 
@@ -19,6 +15,10 @@ resource "aws_cloudformation_stack" "ztna_connector" {
   capabilities = ["CAPABILITY_IAM"]
 }
 
+# associate eip
+resource "aws_eip" "ztna_connector_eip" {
+  domain = "vpc"
+}
 
 resource "aws_eip_association" "ztna_connector_eip_assoc" {
   for_each = aws_cloudformation_stack.ztna_connector
@@ -28,6 +28,7 @@ resource "aws_eip_association" "ztna_connector_eip_assoc" {
   depends_on = [ aws_cloudformation_stack.ztna_connector ]
 }
 
+# get public subnet work with name id
 data "aws_subnet" "public" {
   for_each = var.ztnas
   
