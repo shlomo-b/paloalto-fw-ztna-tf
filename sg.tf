@@ -1,7 +1,7 @@
 resource "aws_security_group" "Allow_services" {
   name        = "PROD"
   description = "global rule"
-  vpc_id      = module.vpc["vpc-one"].vpc_id
+  vpc_id      = module.vpc["vpc1"].vpc_id
 
   ingress {
     description = "All traffic_in"
@@ -30,7 +30,7 @@ resource "aws_security_group" "Allow_services" {
 resource "aws_security_group" "Allow_services_2" {
   name        = "PROD"
   description = "global rule"
-  vpc_id      = module.vpc["vpc-two"].vpc_id
+  vpc_id      = module.vpc["vpc2"].vpc_id
 
   ingress {
     description = "All traffic_in"

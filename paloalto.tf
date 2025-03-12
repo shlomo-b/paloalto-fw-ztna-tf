@@ -15,7 +15,7 @@
 #   interfaces = {
 #     mgmt = {
 #       device_index       = 0
-#       subnet_id          = module.vpc.public_subnets[0]
+#       subnet_id          = module.vpc["vpc1"].public_subnets[0]
 #       name               = "mgmt"
 #       create_public_ip   = true
 #       source_dest_check  = true
@@ -23,7 +23,7 @@
 #     },
 #     public = {
 #       device_index       = 1
-#       subnet_id          = module.vpc.public_subnets[0]
+#       subnet_id          = module.vpc["vpc1"].public_subnets[0]
 #       name               = "public"
 #       create_public_ip   = false
 #       source_dest_check  = true
@@ -31,11 +31,15 @@
 #     },
 #     private = {
 #       device_index       = 2
-#       subnet_id          =  module.vpc.private_subnets[0]
+#       subnet_id          = module.vpc["vpc1"].private_subnets[0]
 #       name               = "private"
 #       source_dest_check  = true
 #       create_public_ip   = false
 #       security_group_ids = [aws_security_group.Allow_services.id]
 #   }
 # }
+# }
+
+# locals {
+#   ztna1_key  = trimspace(file("${path.module}/secrets/ztna1_key.txt"))
 # }
